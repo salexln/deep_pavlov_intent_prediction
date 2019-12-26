@@ -1,26 +1,12 @@
 from deeppavlov import build_model, configs
-# from tensorflow.keras import backend
 import argparse
 
-from tensorflow.python.framework import ops
-ops.reset_default_graph()
 
-# import os
-
-# os.environ["KERAS_BACKEND"] = "tensorflow"
-
-# CONFIG_PATH = configs.classifiers.intents_snips  # could also be configuration dictionary or string path or `pathlib.Path` instance
-#
-# model = build_model(CONFIG_PATH, download=True)  # in case of necessity to download some data
-#
-# model = build_model(CONFIG_PATH, download=False)  # otherwise
-#
-# print(model(["What is the weather in Boston today?"]))
 
 def prepare_data():
-    CONFIG_PATH = configs.classifiers.intents_snips  # could also be configuration dictionary or string path or `pathlib.Path` instance
-    model = build_model(CONFIG_PATH, download=True)  # in case of necessity to download some data
-    model = build_model(CONFIG_PATH, download=False)  # otherwise
+    CONFIG_PATH = configs.classifiers.intents_snips
+    model = build_model(CONFIG_PATH, download=True)
+    model = build_model(CONFIG_PATH, download=False)
 
     return model
 
@@ -42,28 +28,12 @@ def run_test(model):
 
     for phrase in phrases_to_test:
         print(f"{phrase}:{model([phrase])}")
-    # print(model(["What is the weather in Boston today?"]))
 
-# def run(arguments):
 def run():
-    # if arguments.prepare_data:
     model=prepare_data()
-    # if model and arguments.run_test:
     run_test(model=model)
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser('DeepPavlov example')
-
-    # parser.add_argument('--prepare-data',
-    #                     action='store_true',
-    #                     help='Downloads the data and prepares the model. \
-    #                     First time it could take some time')
-    #
-    # parser.add_argument('--run-test',
-    #                     action='store_true',
-    #                     help='Test DeepPavlov intent prediction')
-
-    # run(arguments=parser.parse_args())
     run()
 
 """
